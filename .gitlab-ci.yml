@@ -1,0 +1,88 @@
+stages:
+  - deploy
+  - notification
+
+deploy_development:
+  stage: deploy
+  before_script:
+    - apt-get update && apt-get install openssh-client rsync sshpass -y
+    - "which ssh-agent || ( apt-get update && apt-get install --no-cache openssh )"
+    - export LC_ALL=C
+  script:
+    - sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} -t 'cd sosialbooster_app &&
+      eval "$(ssh-agent -s)" &&
+      ssh-add smb2_gl &&
+      cd dev-w3b.sosialbooster.com &&
+      git restore package-lock.json &&
+      git restore -s@ -SW  -- public &&
+      git pull  &&
+      nvm use default &&
+      npm install &&
+      npm run build &&
+      pm2 restart sosbos-web'
+  only:
+    - main
+
+deploy_live:
+  stage: deploy
+  before_script:
+    - apt-get update && apt-get install openssh-client rsync && apt-get install sshpass
+  script:
+    - sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} -t 'cd sosialbooster_app &&
+      eval "$(ssh-agent -s)" &&
+      ssh-add smb2_gl &&
+      cd web.sosialbooster.com &&
+      git restore package-lock.json &&
+      git restore -s@ -SW  -- public &&
+      git pull  &&
+      nvm use default &&
+      npm install &&
+      npm run build &&
+      pm2 restart sosbos-web-live'
+  only:
+    - release
+
+.notification_setup: &notification_setup
+  - apk add --update git curl
+  - wget https://raw.githubusercontent.com/DiscordHooks/gitlab-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+
+success_notification_dev:
+  image: alpine:latest
+  stage: notification
+  script:
+    - *notification_setup
+    - /bin/ash ./send.sh success $WEBHOOK_DISCORD
+  when: on_success
+  only:
+    - main
+
+failure_notification_dev:
+  image: alpine:latest
+  stage: notification
+  script:
+    - *notification_setup
+    - /bin/ash ./send.sh failure $WEBHOOK_DISCORD
+  when: on_failure
+  only:
+    - main
+
+success_notification_live:
+  image: alpine:latest
+  stage: notification
+  script:
+    - *notification_setup
+    - /bin/ash ./send.sh success $WEBHOOK_LIVE_DISCORD
+  when: on_success
+  only:
+    - release
+
+failure_notification_live:
+  image: alpine:latest
+  stage: notification
+  script:
+    - *notification_setup
+    - /bin/ash ./send.sh failure $WEBHOOK_LIVE_DISCORD
+  when: on_failure
+  only:
+    - release
