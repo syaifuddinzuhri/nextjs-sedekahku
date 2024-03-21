@@ -42,7 +42,7 @@ const PaymentPage = () => {
         </Center>
       ) : (
         <>
-          <HeaderBar isBack={true} title="Program Detail" />
+          <HeaderBar isBack={true} title={programDetailData?.data.name} />
 
           <Box width={"full"} my={4}>
             <Image
