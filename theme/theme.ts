@@ -1,12 +1,12 @@
-import { extendTheme } from '@chakra-ui/react'
-import { m } from 'framer-motion'
-import Container from './components/Container';
-import Modal from './components/Modal';
-import Checkbox from './components/Checkbox';
-
+import { extendTheme } from "@chakra-ui/react";
+import { m } from "framer-motion";
+import Container from "./components/Container";
+import Modal from "./components/Modal";
+import Checkbox from "./components/Checkbox";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
 const breakpoints = ["30em", "48em", "62em", "80em"];
-
 
 const theme = extendTheme({
   breakpoints: {
@@ -21,24 +21,34 @@ const theme = extendTheme({
   },
   Text: {
     baseStyle: {
-      fontSize: "14px"
-    }
+      fontSize: "14px",
+    },
   },
   colors: {
+    primary: {
+      500: "#64cfc7",
+      700: "#49bdb5",
+    },
+    secondary: {
+      500: "#ff5d00",
+      700: "#E25504",
+    },
   },
   sizes: {
-    container: "768px"
+    container: "768px",
   },
   components: {
+    Input,
+    Button,
     Container,
     Modal,
     Checkbox,
     Text: {
       baseStyle: {
-        fontSize: "14px"
-      }
+        fontSize: "14px",
+      },
     },
-  }
-})
+  },
+});
 
-export default theme
+export default theme;

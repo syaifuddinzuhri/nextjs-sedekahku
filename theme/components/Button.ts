@@ -8,12 +8,10 @@ const Button: ComponentStyleConfig = {
     fontWeight: 500,
     transition: "0.3s ease-out",
     opacity: 1,
-    background: "linear-gradient(292.27deg, #e80979 0%, #f8ce16 100%)",
-    borderRadius: "8px",
+    background: "#ff5d00",
+    borderRadius: "50px",
     _hover: {
-      _disabled: {
-        background: "linear-gradient(292.27deg, #e80979 0%, #f8ce16 100%)",
-      },
+      background: "#E25504",
     },
   },
   sizes: {
@@ -27,13 +25,19 @@ const Button: ComponentStyleConfig = {
     },
     md: {
       fontSize: "14px",
-      height: "48px",
+      height: "42px",
     },
   },
   variants: {
     solid: {
       color: "#333333",
       backgroundColor: "#F1F6F7",
+    },
+    primary: {
+      backgroundColor: "#64cfc7",
+      _hover: {
+        background: "#49bdb5",
+      },
     },
     outline: {
       background: "transparent",

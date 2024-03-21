@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import BottomNavbar from "../Navbar/BottomNavbar";
 import Footer from "./Footer";
@@ -20,15 +20,9 @@ const AppDashboardLayout = (props: IAppDashboardLayout) => {
     <Box bg={"gray.50"} minH={"100vh"} position="relative">
       <Box maxWidth="100%" width="420px" minH={"100vh"} mx="auto" bg={"white"}>
         <Box px={4} pt={4} pb={32}>
-          <Text
-            fontWeight={"bold"}
-            fontSize={"2xl"}
-            color={"orange.500"}
-            mb={4}
-            textAlign={"center"}
-          >
-            SEDEKAHKU.COM
-          </Text>
+          <Flex justifyContent={"center"} mb={3}>
+            <Image src="/assets/logo-1.png" alt="Logo" w={40} />
+          </Flex>
           <Divider mb={4} />
           {children}
           <Footer />

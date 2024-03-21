@@ -4,13 +4,15 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Box, Image, Link } from "@chakra-ui/react";
 import { css } from "@emotion/react";
+import { useBannerQuery } from "../api/banner";
+import { BannerResponse } from "../interfaces/banner";
 
-type SliderImageProps = {
-  images: string[][];
-};
-
-const SliderImage = (props: SliderImageProps) => {
-  const { images } = props;
+const SliderImage = () => {
+  const {
+    data: bannerData,
+    refetch: bannerRefetch,
+    isLoading: isLoadingBanner,
+  } = useBannerQuery({});
 
   return (
     <Box
@@ -27,11 +29,11 @@ const SliderImage = (props: SliderImageProps) => {
             display: inline-block;
             border-radius: 3px;
             transition: 0.3s all;
-            background-color: #dd6b20;
+            background-color: #ff5d00;
 
             &.swiper-pagination-bullet-active {
               width: 20px;
-              background-color: #dd6b20;
+              background-color: #ff5d00;
             }
           }
         }
@@ -49,27 +51,17 @@ const SliderImage = (props: SliderImageProps) => {
         speed={2000}
         className="SliderImage"
       >
-        {images.map((item, i) => (
-          <SwiperSlide key={i}>
-            {item[1] != "null" ? (
-              <Link href={item[1]}>
-                <Image
-                  borderRadius={"20px"}
-                  src={item[0]}
-                  alt="Slide Image"
-                  width="100%"
-                />
-              </Link>
-            ) : (
+        {bannerData?.data &&
+          bannerData?.data.map((item, i) => (
+            <SwiperSlide key={i}>
               <Image
-                src={item[0]}
+                src={item.image}
                 borderRadius={"20px"}
                 alt="Slide Image"
                 width="100%"
               />
-            )}
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))}
       </Swiper>
     </Box>
   );

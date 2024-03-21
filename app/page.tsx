@@ -1,10 +1,12 @@
 "use client";
 
+import { useBannerQuery } from "@/src/api/banner";
+import { useProgramQuery } from "@/src/api/program";
 import HeaderBar from "@/src/components/HeaderBar";
 import AppDashboardLayout from "@/src/components/Layouts/AppDashboardLayout";
 import ProgramList from "@/src/components/Program/ProgramList";
 import SliderImage from "@/src/components/SliderImageLink";
-import { Text, useToast } from "@chakra-ui/react";
+import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 function Home() {
   const router = useRouter();
@@ -22,13 +24,27 @@ function Home() {
     ],
   ];
 
+  const {
+    data: programData,
+    refetch: programRefetch,
+    isLoading: isLoadingProgram,
+  } = useProgramQuery({
+    perPage: 10,
+  });
+
   return (
     <AppDashboardLayout>
-      <SliderImage images={images} />
+      <SliderImage />
       <Text fontWeight={"bold"} fontSize={"xl"} color={"gray.700"} mt={5}>
         Program Penggalangan Dana Terbaru
       </Text>
-      <ProgramList isLatest={false} />
+      {isLoadingProgram ? (
+        <Center h="50vh">
+          <Spinner size="xl" color="secondary.500" />
+        </Center>
+      ) : (
+        <ProgramList datas={programData?.data.data || []} />
+      )}
     </AppDashboardLayout>
   );
 }

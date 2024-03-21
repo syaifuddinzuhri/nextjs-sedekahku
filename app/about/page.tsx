@@ -1,42 +1,57 @@
 "use client";
 
+import { useSettingQuery } from "@/src/api/setting";
 import AppDashboardLayout from "@/src/components/Layouts/AppDashboardLayout";
-import { Card, CardBody, Divider, Flex, Text } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Center,
+  Divider,
+  Flex,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import { BiHome, BiLogoGmail, BiPhone } from "react-icons/bi";
 
 const AboutPage = () => {
+  const {
+    data: settingData,
+    refetch: settingRefetch,
+    isLoading: isLoadingSetting,
+  } = useSettingQuery({});
+
   return (
     <AppDashboardLayout>
-      <Text textAlign={"center"}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-        eveniet aliquam a voluptatem, tenetur magni ex maiores dicta quas
-        facilis in laborum corporis magnam recusandae esse saepe fugiat aperiam
-        ea aliquid blanditiis? Minus, labore ipsa minima deleniti earum vel
-        dicta, similique reprehenderit veniam magnam beatae corrupti recusandae
-        delectus repellat ea quas. Nisi temporibus animi tempora incidunt
-        consequuntur maiores dolores saepe, perspiciatis quidem, quos eveniet
-        nihil doloremque soluta numquam porro eos, assumenda impedit vel debitis
-        explicabo. Iusto voluptatem aperiam amet facere dicta atque quis
-        officiis ut, aspernatur eveniet ea, quia laboriosam libero repudiandae
-        iste pariatur voluptates quo tempora vel! Accusantium, fugit.
-      </Text>
-      <Divider my={5} />
-      <Flex flexDirection={"column"} gap={4} alignItems={"center"}>
-        <Flex gap={1} alignItems={"center"} color={"gray.600"}>
-          <BiHome />
-          <Text>Jakarta, Indonesia</Text>
-        </Flex>
-        <Flex gap={1} alignItems={"center"} color={"gray.600"}>
-          <BiLogoGmail />
-          <Text>sedekahku@gmail.com</Text>
-        </Flex>
-        <Flex gap={1} alignItems={"center"} color={"gray.600"}>
-          <BiPhone />
-          <Text>08512345678</Text>
-        </Flex>
-      </Flex>
-      <Divider my={5} />
+      {isLoadingSetting ? (
+        <Center h="70vh">
+          <Spinner size="xl" color="secondary.500" />
+        </Center>
+      ) : (
+        <>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: settingData?.data.about || "",
+            }}
+          ></div>
+          <Divider my={5} />
+          <Flex flexDirection={"column"} gap={4} alignItems={"center"}>
+            <Flex gap={1} alignItems={"center"} color={"gray.600"}>
+              <BiPhone />
+              <Text>{settingData?.data.phone || ""}</Text>
+            </Flex>
+            <Flex gap={1} alignItems={"center"} color={"gray.600"}>
+              <BiLogoGmail />
+              <Text>{settingData?.data.email || ""}</Text>
+            </Flex>
+            <Flex gap={1} alignItems={"center"} color={"gray.600"}>
+              <BiHome />
+              <Text>{settingData?.data.address || ""}</Text>
+            </Flex>
+          </Flex>
+          <Divider my={5} />
+        </>
+      )}
     </AppDashboardLayout>
   );
 };

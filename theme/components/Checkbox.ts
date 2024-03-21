@@ -11,7 +11,7 @@ const Checkbox: ComponentStyleConfig = {
       width: "20px",
       _checked: {
         // borderColor: "#CD5A0F",
-        bg: "#CD5A0F",
+        bg: "#ff5d00",
       },
     },
     label: {

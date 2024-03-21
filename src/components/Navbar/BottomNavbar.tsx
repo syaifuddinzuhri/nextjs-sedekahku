@@ -52,7 +52,11 @@ const BottomNavbar = () => {
             alignItems={"center"}
             gap={2}
             cursor={"pointer"}
-            color={activeMenu === menu.link ? "orange.500" : "gray.500"}
+            color={
+              `/${activeMenu.split("/")[1]}` === menu.link
+                ? "secondary.500"
+                : "gray.500"
+            }
             onClick={() => {
               setActiveMenu(menu.link);
               router.push(menu.link);

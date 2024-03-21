@@ -12,34 +12,17 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import ProgramCard from "./ProgramCard";
+import { ProgramResponse } from "@/src/interfaces/program";
 
 interface IProps {
-  isLatest: boolean;
+  datas: ProgramResponse[];
 }
-const ProgramList = ({ isLatest = false }: IProps) => {
+const ProgramList = ({ datas }: IProps) => {
   return (
     <Box my={5}>
-      {Array.from({ length: 10 }).map((item, i) => (
-        <ProgramCard key={i} />
+      {datas.map((item, i) => (
+        <ProgramCard key={i} program={item} />
       ))}
-
-      {isLatest && (
-        <Button
-          size="md"
-          borderRadius={"20px"}
-          w={"100%"}
-          _hover={{ bg: "gray.600" }}
-          borderWidth={1}
-          background={"gray.500"}
-          onClick={() => {
-            // router.push(`/program/1/payment`);
-          }}
-        >
-          <Text color="white" fontFamily="Poppins" fontWeight={"normal"}>
-            Tampilkan Lebih Banyak
-          </Text>
-        </Button>
-      )}
     </Box>
   );
 };

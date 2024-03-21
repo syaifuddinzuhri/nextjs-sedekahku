@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Icon, Text } from "@chakra-ui/react";
+import { Box, Card, CardBody, Divider, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { BiLockAlt } from "react-icons/bi";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -11,6 +11,7 @@ const Footer = () => {
       flexDirection={"column"}
       alignItems={"center"}
     >
+      <Divider mb={5} />
       <Card w={"full"}>
         <CardBody>
           <Box display={"flex"} alignItems={"center"} gap={4}>
@@ -33,7 +34,7 @@ const Footer = () => {
       </Box>
       <Box display={"flex"} mt={5} alignItems={"center"} gap={1}>
         <BiLockAlt />
-        <Text fontSize={"x-small"}>POWERED BY SEDEKAHKU.COM </Text>
+        <Text fontSize={"x-small"}>POWERED BY SEDEKAHKUY.COM </Text>
       </Box>
     </Box>
   );

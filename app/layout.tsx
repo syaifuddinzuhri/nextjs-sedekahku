@@ -15,11 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <Head>
-        <link rel="icon" href="/assets/logo.png" />
-        <title>Sedekahku</title>
-      </Head>
+    <html>
+      <head>
+        <title>SedekahKuy</title>
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

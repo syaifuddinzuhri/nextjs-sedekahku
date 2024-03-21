@@ -1,5 +1,7 @@
 "use client";
 
+import { ProgramResponse } from "@/src/interfaces/program";
+import { formatToRupiah } from "@/src/utils/RupiahFormatter";
 import {
   Card,
   CardBody,
@@ -12,7 +14,10 @@ import {
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const ProgramCard = () => {
+interface IProps {
+  program: ProgramResponse;
+}
+const ProgramCard = ({ program }: IProps) => {
   const router = useRouter();
   return (
     <Card
@@ -22,32 +27,37 @@ const ProgramCard = () => {
       my={3}
       cursor={"pointer"}
       onClick={() => {
-        router.push(`/program/1`);
+        router.push(`/program/${program?.slug}`);
       }}
     >
       <Image
-        objectFit="contain"
-        maxW={{ base: "100%", sm: "170px" }}
-        ml={{ base: 0, sm: 4 }}
-        src="https://menara.baznas.go.id/attachments/masjid-musholla/donasi/00dcdf2ab83c5113d1938abf4c89826a.jpg"
+        objectFit="cover"
+        maxW={{ base: "100%", sm: "140px" }}
+        src={program?.thumbnail}
         alt="Caffe Latte"
       />
       <Stack>
         <CardBody>
           <Heading size="sm" color={"gray.600"}>
-            Program 1
+            {program?.name}
           </Heading>
           <Flex gap={2} flexDirection={"column"} mt={3}>
             <Flex gap={2}>
-              <Text fontSize={"sm"}>Terkumpul :</Text>
-              <Text fontSize={"sm"} fontWeight={"medium"}>
-                Rp 100.000
+              <Text fontSize={{ base: "sm", sm: "x-small" }}>Terkumpul :</Text>
+              <Text
+                fontSize={{ base: "sm", sm: "x-small" }}
+                fontWeight={"medium"}
+              >
+                {formatToRupiah(program?.total)}
               </Text>
             </Flex>
             <Flex gap={2}>
-              <Text fontSize={"sm"}>Sisa Hari :</Text>
-              <Text fontSize={"sm"} fontWeight={"medium"}>
-                Tidak Terbatas
+              <Text fontSize={{ base: "sm", sm: "x-small" }}>Sisa Waktu :</Text>
+              <Text
+                fontSize={{ base: "sm", sm: "x-small" }}
+                fontWeight={"medium"}
+              >
+                {program?.duration}
               </Text>
             </Flex>
           </Flex>
