@@ -15,6 +15,8 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { formatToRupiah } from "@/src/utils/RupiahFormatter";
+import SliderImage from "@/src/components/SliderImageLink";
+import SliderProgram from "@/src/components/SliderProgram";
 
 const ProgramDetail = () => {
   const router = useRouter();
@@ -102,6 +104,11 @@ const ProgramDetail = () => {
               }}
             ></div>
           </Box>
+
+          <Text mb={3} fontWeight={"medium"} fontSize={"md"} color={"gray.700"}>
+            Galeri Foto
+          </Text>
+          <SliderProgram images={programDetailData?.data.images} />
         </>
       )}
     </AppDashboardLayout>
