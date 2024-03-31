@@ -146,7 +146,7 @@ const PaymentDetail = () => {
                   justifyContent={"center"}
                   flexDirection={"column"}
                 >
-                  <Text fontSize={"sm"}>Nominal</Text>
+                  <Text fontSize={"sm"}>Akun Pembayaran</Text>
                   <Flex
                     gap={1}
                     flexDirection={"column"}
