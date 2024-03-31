@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>SedekahKuy</title>
+        <title>Sedekahyuk</title>
       </head>
       <body>
         <Providers>{children}</Providers>

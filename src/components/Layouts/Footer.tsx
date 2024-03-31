@@ -34,7 +34,7 @@ const Footer = () => {
       </Box>
       <Box display={"flex"} mt={5} alignItems={"center"} gap={1}>
         <BiLockAlt />
-        <Text fontSize={"x-small"}>POWERED BY SEDEKAHKUY.COM </Text>
+        <Text fontSize={"x-small"}>POWERED BY SEDEKAHYUK.COM </Text>
       </Box>
     </Box>
   );
