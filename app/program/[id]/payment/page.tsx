@@ -267,7 +267,8 @@ const PaymentPage = () => {
                             >
                               <Text fontWeight={"bold"}>{item.name}</Text>
                               <Text>
-                                {item.account_number} A.n {item.account_name}
+                                {item.account_number}
+                                {/* {item.account_number} A.n {item.account_name} */}
                               </Text>
                             </Flex>
                           </Flex>

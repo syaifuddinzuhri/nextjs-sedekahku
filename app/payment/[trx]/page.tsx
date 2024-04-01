@@ -175,10 +175,10 @@ const PaymentDetail = () => {
                         }
                       />
                     </Flex>
-                    <Text>
+                    {/* <Text>
                       A.n{" "}
                       {paymentDetailData?.data.payment_account?.account_name}
-                    </Text>
+                    </Text> */}
                   </Flex>
                 </Flex>
               </Flex>
