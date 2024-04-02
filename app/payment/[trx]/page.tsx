@@ -131,18 +131,20 @@ const PaymentDetail = () => {
                     <Text fontWeight={"medium"}>
                       {formatToRupiah(paymentDetailData?.data.nominal)}
                     </Text>
-                    <Icon
-                      as={MdCopyAll}
-                      boxSize={5}
-                      cursor={"pointer"}
-                      color={"secondary.500"}
+                    <Flex
+                      align="center"
+                      cursor="pointer"
+                      color="secondary.500"
                       onClick={() =>
                         copyText(
                           paymentDetailData?.data?.nominal.toString() || "",
                           "Nominal berhasil disalin"
                         )
                       }
-                    />
+                    >
+                      <Icon as={MdCopyAll} boxSize={5} />
+                      <Text ml={1}>Salin</Text>
+                    </Flex>
                   </Flex>
                 </Flex>
                 <Flex
@@ -165,11 +167,10 @@ const PaymentDetail = () => {
                             ?.account_number
                         }{" "}
                       </Text>
-                      <Icon
-                        as={MdCopyAll}
-                        boxSize={5}
-                        cursor={"pointer"}
-                        color={"secondary.500"}
+                      <Flex
+                        align="center"
+                        cursor="pointer"
+                        color="secondary.500"
                         onClick={() =>
                           copyText(
                             paymentDetailData?.data?.payment_account
@@ -177,7 +178,10 @@ const PaymentDetail = () => {
                             "Nomor rekening berhasil disalin"
                           )
                         }
-                      />
+                      >
+                        <Icon as={MdCopyAll} boxSize={5} />
+                        <Text ml={1}>Salin</Text>
+                      </Flex>
                     </Flex>
                     {/* <Text>
                       A.n{" "}

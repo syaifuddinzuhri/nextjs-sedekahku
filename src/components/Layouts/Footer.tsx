@@ -29,7 +29,7 @@ const Footer = () => {
         <Text fontSize={"sm"} color={"gray.500"}>
           Disclamer: <br /> Informasi dan opini yang tertulis di halaman
           campaign ini adalah milik campaigner (pihak yang menggalang dana) dan
-          tidak mewakili Mayar sebagai pemroses pembayaran.
+          tidak mewakili Sedekahyuk.com sebagai pemroses pembayaran.
         </Text>
       </Box>
       <Box display={"flex"} mt={5} alignItems={"center"} gap={1}>
