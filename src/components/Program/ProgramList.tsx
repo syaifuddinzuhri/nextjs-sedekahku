@@ -16,13 +16,22 @@ import { ProgramResponse } from "@/src/interfaces/program";
 
 interface IProps {
   datas: ProgramResponse[];
+  isMobile?: boolean;
 }
-const ProgramList = ({ datas }: IProps) => {
+const ProgramList = ({ datas, isMobile = true }: IProps) => {
   return (
     <Box my={5}>
-      {datas.map((item, i) => (
-        <ProgramCard key={i} program={item} />
-      ))}
+      {isMobile ? (
+        datas.map((item, i) => <ProgramCard key={i} program={item} />)
+      ) : (
+        <Flex gap={3} flexWrap={"wrap"} justifyContent={"space-between"}>
+          {datas.map((item, i) => (
+            <Box width={"48%"} key={i}>
+              <ProgramCard program={item} />
+            </Box>
+          ))}
+        </Flex>
+      )}
     </Box>
   );
 };

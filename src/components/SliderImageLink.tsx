@@ -7,7 +7,10 @@ import { css } from "@emotion/react";
 import { useBannerQuery } from "../api/banner";
 import { BannerResponse } from "../interfaces/banner";
 
-const SliderImage = () => {
+interface IProps {
+  isMobile?: boolean;
+}
+const SliderImage = ({ isMobile = true }: IProps) => {
   const {
     data: bannerData,
     refetch: bannerRefetch,
@@ -59,6 +62,8 @@ const SliderImage = () => {
                 borderRadius={"20px"}
                 alt="Slide Image"
                 width="100%"
+                maxHeight={isMobile ? "" : "500px"}
+                objectFit="cover"
               />
             </SwiperSlide>
           ))}

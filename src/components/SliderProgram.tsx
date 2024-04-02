@@ -7,8 +7,11 @@ import { css } from "@emotion/react";
 import { useBannerQuery } from "../api/banner";
 import { BannerResponse } from "../interfaces/banner";
 
-const SliderProgram = ({ images }: any) => {
-  console.log(images);
+interface IProps {
+  isMobile?: boolean;
+  images: any;
+}
+const SliderProgram = ({ images, isMobile = true }: IProps) => {
   return (
     <Box
       css={css`
@@ -54,6 +57,8 @@ const SliderProgram = ({ images }: any) => {
                 borderRadius={"20px"}
                 alt="Slide Image"
                 width="100%"
+                maxHeight={isMobile ? "" : "500px"}
+                objectFit="cover"
               />
             </SwiperSlide>
           ))}
